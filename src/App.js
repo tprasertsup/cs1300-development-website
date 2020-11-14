@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import ProductsGrid from './ProductsGrid.js';
+import StoreNavbar from './StoreNavbar.js';
+import ProductsList from './ProductsList.js';
 
 function App() {
+  const products = ProductsList();
+  console.log(products);
+  const [filter, setFilter] = useState(null)
+  const [sort, setSort] = useState(null)
+
+  const handleFilterSubmit = (category, e) => {
+    setFilter(category)
+    console.log(category)
+  }
+  const handleSortSubmit = (sortBy, e) => {
+    setSort(sortBy)
+    console.log(sortBy)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <StoreNavbar
+          onFilterSubmit={handleFilterSubmit}
+          onSortSubmit={handleSortSubmit} />
       </header>
+      <body class="text-center">
+        <ProductsGrid
+          products={products}
+          key={filter + sort}
+          filter={filter}
+          sort={sort} />
+      </body>
     </div>
   );
 }
