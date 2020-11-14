@@ -4,7 +4,8 @@ import Cart from './Cart.js';
 
 export default function StoreNavbar(props) {
     const [open, setopen] = useState(false);
-
+    const [sort, setSort] = useState('');
+    let sortTitle = `Sort by ${sort}`
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -19,11 +20,39 @@ export default function StoreNavbar(props) {
                             <NavDropdown.Item onClick={(e) => props.onFilterSubmit("jewelery", e)}>Jewelery</NavDropdown.Item>
                             <NavDropdown.Item onClick={(e) => props.onFilterSubmit("electronics", e)}>Electronics</NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown title="Sort" id="basic-nav-dropdown">
-                            <NavDropdown.Item onClick={(e) => props.onSortSubmit("category", e)}>Category</NavDropdown.Item>
-                            <NavDropdown.Item onClick={(e) => props.onSortSubmit("alphabet", e)}>Alphabet</NavDropdown.Item>
-                            <NavDropdown.Item onClick={(e) => props.onSortSubmit("price asc", e)}>Price Ascending</NavDropdown.Item>
-                            <NavDropdown.Item onClick={(e) => props.onSortSubmit("price desc", e)}>Price Descending</NavDropdown.Item>
+                        <NavDropdown title={sortTitle} id="basic-nav-dropdown">
+                            <NavDropdown.Item
+                                onClick={(e) => {
+                                    props.onSortSubmit("category", e)
+                                    setSort("")
+                                }}
+                            >
+                                Select
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                                onClick={(e) => {
+                                    props.onSortSubmit("alphabet", e)
+                                    setSort("Alphabet")
+                                }}
+                            >
+                                Alphabet
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                                onClick={(e) => {
+                                    props.onSortSubmit("price asc", e)
+                                    setSort("Price (Ascending)")
+                                }}
+                            >
+                                Price (Ascending)
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                                onClick={(e) => {
+                                    props.onSortSubmit("price desc", e)
+                                    setSort("Price (Descending)")
+                                }}
+                            >
+                                Price (Descending)
+                            </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Button variant="warning" onClick={() => setopen(!open)}
