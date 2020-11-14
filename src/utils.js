@@ -1,6 +1,5 @@
 export const removeDuplicate = (list) => {
-    return list.slice() // slice makes copy of array before sorting it
-        .sort(function(a, b) {
+    list.sort(function(a, b) {
             return a.id > b.id;
         })
         .reduce(function(a, b) {
@@ -9,8 +8,6 @@ export const removeDuplicate = (list) => {
         }, []); // this empty array becomes the 
 }
 
-export const countItems = (list, id) => {
-    return list.filter((item) => item.id === id).length;
-}
+export const countItems = (list, id) => list.filter((item) => item.id === id).length
 
 export const roundNumber = (num) => parseFloat(Number(num).toFixed(2))
