@@ -22,12 +22,12 @@ export default function Cart(props) {
                                 amount={countItems(props.cart, item.id)}
                                 onAddItem={props.onAddItem}
                                 onRemoveItem={props.onRemoveItem} />)}
-                        <Row>
+                        <Row className="align-middle">
                             <Col className="text-right">
-                                <h4>Total: ${props.total}</h4>
+                                <h4 className="mb-0">Total: ${props.total}</h4>
                             </Col>
                             <Col className="text-left">
-                                <Button variant="primary" onClick={handleShow}>Checkout</Button>
+                                <Button variant="info" className="shadow" onClick={handleShow}>Checkout</Button>
                             </Col>
                         </Row>
                     </Container>
