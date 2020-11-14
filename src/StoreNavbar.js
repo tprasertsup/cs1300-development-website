@@ -5,6 +5,7 @@ import { Navbar, Nav, NavDropdown, Button, Collapse } from 'react-bootstrap';
 export default function StoreNavbar(props) {
     const [sort, setSort] = useState('');
     let sortTitle = `Sort by ${sort}`
+    let cartButtonText = props.viewCart ? 'Hide Cart' : 'View Cart'
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -56,7 +57,7 @@ export default function StoreNavbar(props) {
                     </Nav>
                     <Button variant="warning" onClick={(e) => props.onViewCart(e)}
                         aria-controls="example-collapse-text"
-                        aria-expanded={props.viewCart}>View Cart</Button>
+                        aria-expanded={props.viewCart}>{cartButtonText}</Button>
                 </Navbar.Collapse>
             </Navbar>
         </div >
