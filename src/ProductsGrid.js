@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ProductItem from './ProductItem.js';
+import cloneDeep from 'lodash/cloneDeep';
 
 export default function ProductsGrid(props) {
 
-    let modifiedProducts = props.products
+    let modifiedProducts = cloneDeep(props.products);
     modifiedProducts = props.filter ? modifiedProducts.filter(item => item.category === props.filter) : modifiedProducts
     if (props.sort === "alphabet") {
         modifiedProducts = modifiedProducts.sort(function (a, b) {

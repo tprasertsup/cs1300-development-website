@@ -3,28 +3,29 @@ import './App.css';
 import ProductsGrid from './ProductsGrid.js';
 import StoreNavbar from './StoreNavbar.js';
 import ProductsList from './ProductsList.js';
+import Cart from './Cart.js';
 
 function App() {
   const products = ProductsList();
-  console.log(products);
   const [filter, setFilter] = useState(null)
   const [sort, setSort] = useState(null)
+  const [cartItems, setCartItems] = useState({})
+  const [viewCart, setViewCart] = useState(false)
 
-  const handleFilterSubmit = (category, e) => {
-    setFilter(category)
-    console.log(category)
-  }
-  const handleSortSubmit = (sortBy, e) => {
-    setSort(sortBy)
-    console.log(sortBy)
-  }
+  const handleFilterSubmit = (category, e) => setFilter(category)
+  const handleSortSubmit = (sortBy, e) => setSort(sortBy)
+  const handleViewCart = (e) => setViewCart(!viewCart)
 
   return (
     <div className="App">
       <header>
         <StoreNavbar
+          viewCart={viewCart}
           onFilterSubmit={handleFilterSubmit}
-          onSortSubmit={handleSortSubmit} />
+          onSortSubmit={handleSortSubmit}
+          onViewCart={handleViewCart} />
+        <Cart
+          viewCart={viewCart} />
       </header>
       <body class="text-center">
         <ProductsGrid

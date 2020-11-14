@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown, Button, Collapse } from 'react-bootstrap';
-import Cart from './Cart.js';
+
 
 export default function StoreNavbar(props) {
-    const [open, setopen] = useState(false);
     const [sort, setSort] = useState('');
     let sortTitle = `Sort by ${sort}`
     return (
@@ -55,16 +54,11 @@ export default function StoreNavbar(props) {
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Button variant="warning" onClick={() => setopen(!open)}
+                    <Button variant="warning" onClick={(e) => props.onViewCart(e)}
                         aria-controls="example-collapse-text"
-                        aria-expanded={open}>View Cart</Button>
+                        aria-expanded={props.viewCart}>View Cart</Button>
                 </Navbar.Collapse>
             </Navbar>
-            <Collapse in={open}>
-                <div id="example-collapse-text">
-                    <Cart />
-                </div>
-            </Collapse>
         </div >
     );
 
