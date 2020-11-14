@@ -22,7 +22,7 @@ export default function Cart(props) {
                                 amount={countItems(props.cart, item.id)}
                                 onAddItem={props.onAddItem}
                                 onRemoveItem={props.onRemoveItem} />)}
-                        <Row className="align-middle">
+                        <Row className="align-middle mt-4">
                             <Col className="text-right">
                                 <h4 className="mb-0">Total: ${props.total}</h4>
                             </Col>
