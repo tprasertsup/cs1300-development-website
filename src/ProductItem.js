@@ -14,7 +14,9 @@ export default function ProductItem(props) {
                     <Container>
                         <Row>
                             <Col className="text-right"> <Card.Text className="h3">${props.product.price}</Card.Text></Col>
-                            <Col className="text-left"> <Button variant="danger">Add to cart</Button></Col>
+                            <Col className="text-left">
+                                <Button variant="danger" onClick={(e) => props.onAddToCart(props.product, e)}>Add to cart</Button>
+                            </Col>
                         </Row>
                     </Container>
 

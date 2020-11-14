@@ -37,3 +37,7 @@ code {
 .cart {
     color: white;
 }
+
+.cart-item {
+    font-size: 1.25rem;
+}

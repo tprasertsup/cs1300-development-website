@@ -29,7 +29,7 @@ export default function ProductsGrid(props) {
     return (
         <div class="d-flex flex-wrap justify-content-center bd-highlight mb-3 product">
             {modifiedProducts &&
-                modifiedProducts.map((product) => <ProductItem product={product} />)}
+                modifiedProducts.map((product) => <ProductItem product={product} onAddToCart={props.onAddToCart} />)}
         </div>
 
     );
