@@ -1,24 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ProductItem from './ProductItem.js';
 import cloneDeep from 'lodash/cloneDeep';
+import * as Constants from './constants';
 
 export default function ProductsGrid(props) {
 
     let modifiedProducts = cloneDeep(props.products);
-    modifiedProducts = props.filter ? modifiedProducts.filter(item => item.category === props.filter) : modifiedProducts
-    if (props.sort === "alphabet") {
+
+    // filter by category
+    if (props.filterCategory) {
+        modifiedProducts = modifiedProducts.filter(item => item.category === props.filterCategory)
+    }
+
+    // filter by price
+    if (props.filterPrice === Constants.PRICE_LOW) {
+        modifiedProducts = modifiedProducts.filter(item => item.price < 10)
+
+    } else if (props.filterPrice === Constants.PRICE_MID) {
+        modifiedProducts = modifiedProducts.filter(item => (item.price >= 10 && item.price < 100))
+
+    } else if (props.filterPrice === Constants.PRICE_HIGH) {
+        modifiedProducts = modifiedProducts.filter(item => item.price >= 100)
+    }
+
+    // sort
+    if (props.sort === Constants.SORT_ALPHABET) {
         modifiedProducts = modifiedProducts.sort(function (a, b) {
             if (a.title < b.title) { return -1; }
             if (a.title > b.title) { return 1; }
             return 0;
         })
-    } else if (props.sort === "price asc") {
+    } else if (props.sort === Constants.SORT_PRICE_ASC) {
         modifiedProducts = modifiedProducts.sort(function (a, b) {
             if (a.price < b.price) { return -1; }
             if (a.price > b.price) { return 1; }
             return 0;
         })
-    } else if (props.sort === "price desc") {
+    } else if (props.sort === Constants.SORT_PRICE_DESC) {
         modifiedProducts = modifiedProducts.sort(function (a, b) {
             if (a.price < b.price) { return 1; }
             if (a.price > b.price) { return -1; }
