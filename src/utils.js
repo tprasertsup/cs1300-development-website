@@ -1,5 +1,5 @@
 export const removeDuplicate = (list) => {
-    list.sort(function(a, b) {
+    return list.sort(function(a, b) {
             return a.id > b.id;
         })
         .reduce(function(a, b) {
