@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Development
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a shopping website called "Fake Store". This online store sells men clothing, women clothing, electronics, and jewelry. 
 
-## Available Scripts
+## Website's Components
 
-In the project directory, you can run:
+- Navigation bar at the top of the page, which includes
+  - 2 filter categories
+    - filter by category
+    - filter by price range
+  - 1 sorting feature
+    - sort alphabetically by item's title
+    - sort by price
+  - 'View Cart' button, which displays a cart (the aggregate section), which is a collapse of the navigation bar. Inside the cart are
+    - list of items the user puts inside the cart
+    - price of each item
+    - the number of items, with plus and minus sign so the user can add or remove items in the cart
+    - total price
+    - 'Checkout' button 
+- 20 items available for sale, displaying in a card with
+  - image
+  - category
+  - description
+  - price
+  - 'Add to Cart' button
 
-### `npm start`
+## js files in src
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### React Classes
+- App
+  - fetches data of items available to sell from `https://fakestoreapi.com/products`
+  - passes the data down to `Store.js`
+- Store
+  - holds states of the website, including
+    - `filterCategory`: category the items are currently filtered by
+    - `filterPrice`: price range the items are currently filtered by
+    - `sort`: how the items are currently sorted by 
+    - `cart`: list of items added into cart
+    - `viewCart`: whether the collapse cart is displayed or hidden
+    - `total`: the total price of all items in the cart
+  - connects changes made in `StoreNavbar.js`, `Cart.js` and `ProductsGrid.js`
+- StoreNavbar
+  - a navigation bar at the top of the website
+  - holds filter and sorting dropdown and the 'View Cart' button
+  - current filter and sorting features are highlighted 
+  - If the 'View Cart' button is clicked, `Cart.js`, which is a collapse of the navigation bar, will be shown
+  - received `viewCart`,  `filterCategory`, `filterPrice`, `sort` from `Store.js`
+  - triggers `handleFilterCategorySubmit` in `Store.js` after changing the category to be filtered
+  - triggers `handleFilterPriceSubmit` in `Store.js` after changing the price range to be filtered 
+  - triggers `handleSortSubmit` in `Store.js` after changing how to sort the shown items
+  - triggers `handleViewCart` in `Store.js` after clicking 'View Cart'/'Hide Cart' button (to show/hide the collapse cart)
+- Cart
+  - a collpase of the navigation bar
+  - shown only if the 'View Cart' button in the navigation bar is clicked
+  - hidden after click the 'Hide Cart' button in the navigation bar
+  - displays the following
+    - list of `CartItem.js`, where each `CartItem.js` displays a unique item
+    - total price of all items in the cart
+  - received `viewCart`, `cart`, and `total` from `Store.js`
+  - also includes a modal that shows a checkout confirmation
+- CartItem
+  - a row of information about one unique item
+  - displays the following
+    - title of the item 
+    - price of one unit
+    - the number of units with '+' and '-' to add/remove item
+  - received `item`, `amount` (i.e. current number of units of the item) from `Cart.js`
+  - triggers `handleAddToCart` if the '+' button is clicked (i.e. adding one more unit to `cart`)
+  - triggers `handleRemoveFromCart` if the '-' button is clicked (i.e. removing one unit from `cart`)
+- ProductsGrid
+  - holds all cards of filtered items
+  - filters and sorts items based on `filterCategory`, `filterPrice`, and `sort`
+  - for each filtered item, add a `ProductItem.js`
+  - received `products`, `filterCategory`, `filterPrice`, and `sort` from Store.js
+  
+- ProductItem
+  - a card that displays information about a unique item
+  - displays the following about an item
+    - image
+    - title
+    - category
+    - description
+  - has the 'Add to Cart' button that will trigger `handleAddToCart` after it is clicked
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Other js files
+- utils: utility functions including `removeDuplicate`, `countItems`, and `roundNumber`
+- constants: constant values used in the project
