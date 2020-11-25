@@ -54,9 +54,10 @@ export default function ProductsGrid(props) {
 
     return (
         <div class="d-flex flex-wrap justify-content-center bd-highlight mb-3 product">
-            {modifiedProducts &&
+            {modifiedProducts && modifiedProducts.length > 0 &&
                 modifiedProducts.map((product) => <ProductItem product={product} onAddToCart={props.onAddToCart} />)}
-            {modifiedProducts.length === 0 && <h4 class="mt-5">No items found in the selected category and price range</h4>}
+            {!modifiedProducts && <h4 class="mt-5">Loading...</h4>}
+            {modifiedProducts && modifiedProducts.length === 0 && <h4 class="mt-5">No items found in the selected category and price range</h4>}
         </div>
 
     );
