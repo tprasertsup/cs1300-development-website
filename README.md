@@ -15,6 +15,7 @@ This project is a shopping website called "Fake Store". This online store sells 
     - list of items the user puts inside the cart
     - price of each item
     - the number of items, with plus and minus sign so the user can add or remove items in the cart
+    - 'Delete' button in each item to remove all units of that item from the cart
     - total price
     - 'Checkout' button 
 - 20 items available for sale, displaying in a card with
@@ -37,7 +38,6 @@ This project is a shopping website called "Fake Store". This online store sells 
     - `sort`: how the items are currently sorted by 
     - `cart`: list of items added into cart
     - `viewCart`: whether the collapse cart is displayed or hidden
-    - `total`: the total price of all items in the cart
   - connects changes made in `StoreNavbar.js`, `Cart.js` and `ProductsGrid.js`
 - StoreNavbar
   - a navigation bar at the top of the website
@@ -55,8 +55,9 @@ This project is a shopping website called "Fake Store". This online store sells 
   - hidden after click the 'Hide Cart' button in the navigation bar
   - displays the following
     - list of `CartItem.js`, where each `CartItem.js` displays a unique item
+    - total number of items in the cart
     - total price of all items in the cart
-  - received `viewCart`, `cart`, and `total` from `Store.js`
+  - received `viewCart` and `cart` from `Store.js`
   - also includes a modal that shows a checkout confirmation
 - CartItem
   - a row of information about one unique item
@@ -67,6 +68,7 @@ This project is a shopping website called "Fake Store". This online store sells 
   - received `item`, `amount` (i.e. current number of units of the item) from `Cart.js`
   - triggers `handleAddToCart` if the '+' button is clicked (i.e. adding one more unit to `cart`)
   - triggers `handleRemoveFromCart` if the '-' button is clicked (i.e. removing one unit from `cart`)
+  - triggers `handleRemoveAllFromCart` if the 'Delete' button is clicked (i.e. removing all units of that item from `cart`)
 - ProductsGrid
   - holds all cards of filtered items
   - filters and sorts items based on `filterCategory`, `filterPrice`, and `sort`
@@ -83,5 +85,5 @@ This project is a shopping website called "Fake Store". This online store sells 
   - has the 'Add to Cart' button that will trigger `handleAddToCart` after it is clicked
 
 ### Other js files
-- utils: utility functions including `removeDuplicate`, `countItems`, and `roundNumber`
+- utils: utility functions including `removeDuplicate`, `countItems`, `roundNumber`, and `getTotalPrice`
 - constants: constant values used in the project

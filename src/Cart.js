@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { Button, Container, Row, Col, Collapse, Modal } from 'react-bootstrap';
 import CartItem from './CartItem.js'
-import { removeDuplicate, countItems } from './utils';
+import { removeDuplicate, countItems, getTotalPrice, roundNumber } from './utils';
 
 export default function Cart(props) {
 
     const uniqueCart = removeDuplicate(props.cart)
+    console.log(uniqueCart)
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const total = roundNumber(getTotalPrice(props.cart));
 
     return (
         <div  >
@@ -21,10 +24,11 @@ export default function Cart(props) {
                                 item={item}
                                 amount={countItems(props.cart, item.id)}
                                 onAddItem={props.onAddItem}
-                                onRemoveItem={props.onRemoveItem} />)}
+                                onRemoveItem={props.onRemoveItem}
+                                onDelete={props.onDelete} />)}
                         <Row className="align-middle mt-4">
                             <Col className="text-right">
-                                <h4 className="mb-0">Total: ${props.total}</h4>
+                                <h4 className="mb-0">Subtotal ({props.cart.length} items): ${total}</h4>
                             </Col>
                             <Col className="text-left">
                                 <Button variant="info" className="shadow" onClick={handleShow}>Checkout</Button>
@@ -39,7 +43,7 @@ export default function Cart(props) {
                     <Modal.Title>Confirmation</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Checkout total: <b>${props.total}</b></p>
+                    <p>Checkout total: <b>${total}</b></p>
                     <p>Thank you for shopping with us!</p>
                 </Modal.Body>
             </Modal>

@@ -3,7 +3,8 @@ import './App.css';
 import ProductsGrid from './ProductsGrid.js';
 import StoreNavbar from './StoreNavbar.js';
 import Cart from './Cart.js';
-import { roundNumber } from './utils';
+import { countItems, roundNumber } from './utils';
+import { remove, round } from 'lodash';
 
 export default function Store(props) {
 
@@ -12,7 +13,6 @@ export default function Store(props) {
     const [sort, setSort] = useState(null)
     const [cart, setCart] = useState([]);
     const [viewCart, setViewCart] = useState(false)
-    const [total, setTotal] = useState(0)
 
     const handleFilterCategorySubmit = (category, e) => setFilterCategory(category)
     const handleFilterPriceSubmit = (level, e) => setFilterPrice(level)
@@ -21,8 +21,6 @@ export default function Store(props) {
 
     const handleAddToCart = (added, e) => {
         setCart([...cart, added])
-        console.log(added.price)
-        setTotal(roundNumber(total + added.price))
     }
 
     const handleRemoveFromCart = (removed, e) => {
@@ -31,15 +29,18 @@ export default function Store(props) {
             const update = [...cart];
             update.splice(productIndex, 1)
             setCart(update)
-            console.log(removed.price)
-            setTotal(roundNumber(total - removed.price))
         }
+    }
+
+    const handleRemoveAllFromCart = (removed, e) => {
+        setCart(cart.filter(item => item.id != removed.id))
     }
 
     return (
         <div>
             <header>
                 <StoreNavbar
+                    key={cart}
                     viewCart={viewCart}
                     filterCategory={filterCategory}
                     filterPrice={filterPrice}
@@ -51,9 +52,9 @@ export default function Store(props) {
                 <Cart
                     viewCart={viewCart}
                     cart={cart}
-                    total={total}
                     onAddItem={handleAddToCart}
-                    onRemoveItem={handleRemoveFromCart} />
+                    onRemoveItem={handleRemoveFromCart}
+                    onDelete={handleRemoveAllFromCart} />
             </header>
             <body class="text-center">
                 <ProductsGrid
