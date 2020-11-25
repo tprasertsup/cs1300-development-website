@@ -1,6 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Row, Col, Pagination, Button } from 'react-bootstrap';
 
+/**
+ * CartItem contains the following information of each item in the cart. 
+ *  1. Item's title
+ *  2. Item's price per unit
+ *  3. The quanity of the item in the cart with - and + sign
+ *      Notice that - is disabled if the current quantity is 1
+ *  4. 'Delete' button, which will delete all units of the certain item
+ * 
+ *  Props include item (with properties of title, price) and amount
+ * 
+ *  Clicking on - will trigger handleRemoveFromCart in Store
+ *  Clicking on + will trigger handleAddToCart in Store
+ *  Clicking on Delete button will trigger handleRemoveAllFromCart in Store
+ */
 export default function CartItem(props) {
 
     return (

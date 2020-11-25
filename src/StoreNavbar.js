@@ -3,6 +3,21 @@ import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import * as Constants from './constants';
 
 
+/**
+ * Navigation bar at the top of the website. Includes
+ * 1. Store's name
+ * 2. Dropdown of how to filter by category
+ * 3. Dropdown of how to filter by price
+ * 4. Dropdown of how to sort
+ * 5. View/Hide Cart button
+ * 
+ *  Props include  viewCart, filterCategory, filterPrice, and sort
+ * 
+ *  Clicking on filter by category will trigger handleFilterCategorySubmit in Store
+ *  Clicking on filter by price will trigger handleFilterPriceSubmit in Store
+ *  Clicking on sort will trigger handleSortSubmit in Store
+ *  Clicking on View/Hide Cart button will trigger handleViewCart in Store
+ */
 export default function StoreNavbar(props) {
 
     let cartButtonText = props.viewCart ? 'Hide Cart' : 'View Cart'

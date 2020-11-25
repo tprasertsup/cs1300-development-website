@@ -3,9 +3,17 @@ import ProductItem from './ProductItem.js';
 import cloneDeep from 'lodash/cloneDeep';
 import * as Constants from './constants';
 
+
+/**
+ * ProductGrid holds cards of the filtered and sorted list of products
+ * 
+ *  Props include filterCategory, filterPrice, sort, and products
+ */
 export default function ProductsGrid(props) {
 
     let modifiedProducts = cloneDeep(props.products);
+
+    /** Filter and sort the list of products (props.products) first*/
 
     // filter by category
     if (props.filterCategory) {
@@ -48,6 +56,7 @@ export default function ProductsGrid(props) {
         <div class="d-flex flex-wrap justify-content-center bd-highlight mb-3 product">
             {modifiedProducts &&
                 modifiedProducts.map((product) => <ProductItem product={product} onAddToCart={props.onAddToCart} />)}
+            {modifiedProducts.length === 0 && <h4 class="mt-5">No items found in the selected category and price range</h4>}
         </div>
 
     );

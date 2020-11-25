@@ -1,6 +1,13 @@
 import React from 'react';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 
+/**
+ * Card with information of each item available for sale
+ * 
+ *  Props include product, which contains the following properties: title, category, description, and price
+ * 
+ *  Clicking on Add to Cart button will trigger handleAddToCart in Store
+ */
 export default function ProductItem(props) {
 
     return (
@@ -19,8 +26,6 @@ export default function ProductItem(props) {
                             </Col>
                         </Row>
                     </Container>
-
-
                 </Card.Body>
             </Card>
         </div >
